@@ -1,0 +1,32 @@
+/* popup.css - minimal styling */
+:root {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    color: #111;
+  }
+  .container {
+    padding: 12px;
+    width: 680px; /* wide enough to display cookies; chrome popup can be wide */
+    max-width: 920px;
+  }
+  header { margin-bottom: 8px; }
+  h1 { font-size: 16px; margin: 0 0 4px 0; }
+  .url { color: #333; font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  
+  .status { margin: 8px 0; font-style: italic; color: #444; }
+  
+  .cookies { width: 100%; border-collapse: collapse; margin-top: 6px; }
+  .cookies th, .cookies td {
+    border: 1px solid #ddd;
+    padding: 6px 8px;
+    vertical-align: top;
+    max-width: 220px;
+    word-break: break-all;
+  }
+  .cookies th { background: #f3f3f3; font-weight: 600; font-size: 12px; }
+  .cookies td { font-size: 12px; }
+  
+  footer { margin-top: 10px; display:flex; gap:8px; }
+  button { padding: 6px 10px; font-size: 13px; cursor: pointer; border-radius: 6px; border: 1px solid #bbb; background: #fff; }
+  button:hover { filter: brightness(0.97) }
+  

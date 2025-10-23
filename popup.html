@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Show Cookies</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Cookies for current tab</h1>
+        <div id="url" class="url"></div>
+      </header>
+
+      <main>
+        <div id="status" class="status">Loading cookies…</div>
+
+        <table id="cookiesTable" class="cookies" hidden>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Value</th>
+              <th>Domain</th>
+              <th>Path</th>
+              <th>Expires</th>
+              <th>Flags</th>
+            </tr>
+          </thead>
+          <tbody id="tbody"></tbody>
+        </table>
+      </main>
+
+      <footer>
+        <button id="refreshBtn">Refresh</button>
+      </footer>
+    </div>
+
+    <script src="popup.js"></script>
+  </body>
+</html>
