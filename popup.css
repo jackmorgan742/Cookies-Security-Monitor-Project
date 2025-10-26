@@ -1,4 +1,3 @@
-/* popup.css - minimal styling */
 :root {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 13px;
@@ -6,8 +5,7 @@
   }
   .container {
     padding: 12px;
-    width: 680px; /* wide enough to display cookies; chrome popup can be wide */
-    max-width: 920px;
+    width: 1440px; 
   }
   header { margin-bottom: 8px; }
   h1 { font-size: 16px; margin: 0 0 4px 0; }

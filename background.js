@@ -7,7 +7,6 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     const url = message.url;
     fetchCookiesForUrl(url).then(cookies => sendResponse({cookies}))
                        .catch(err => sendResponse({error: err.message}));
-    // Return true to indicate we'll respond asynchronously.
     return true;
   }
 });
@@ -15,19 +14,8 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 async function fetchCookiesForUrl(url) {
   if (!url) return [];
 
-  // Try to get cookies by URL 
   const cookiesByUrl = await chrome.cookies.getAll({ url }).catch(() => []);
-/*
-  // Extract domain and also try domain-based lookup to catch domain-scoped cookies.
-  const domain = (new URL(url)).hostname;
-  // Use leading dot to match domain-scoped cookies
-  const domainPattern = domain.startsWith(".") ? domain : "." + domain;
-  const cookiesByDomain = await chrome.cookies.getAll({ domain: domainPattern }).catch(() => []);
 
-  // Also attempt without dot
-  const cookiesByDomainNoDot = await chrome.cookies.getAll({ domain: domain }).catch(() => []);
-*/
-  // Merge unique cookies (by name+domain+path+storeId)
   const merged = {};
   [cookiesByUrl].forEach(list => {
     (list || []).forEach(c => {
@@ -36,7 +24,6 @@ async function fetchCookiesForUrl(url) {
     });
   });
 
-  // Convert to array and normalize fields for UI
   const result = Object.values(merged).map(c => ({
     name: c.name,
     value: c.value,

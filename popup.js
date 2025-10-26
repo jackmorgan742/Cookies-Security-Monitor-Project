@@ -5,7 +5,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const cookiesTable = document.getElementById("cookiesTable");
     const urlDiv = document.getElementById("url");
     const refreshBtn = document.getElementById("refreshBtn");
-    const exportBtn = document.getElementById("exportBtn");
   
     async function update() {
       status.textContent = "Getting active tab...";
@@ -50,56 +49,34 @@ document.addEventListener("DOMContentLoaded", () => {
           tr.appendChild(nameTd);
   
           const valueTd = document.createElement("td");
-          // short value preview with ability to expand on click
-          const short = c.value.length > 120 ? (c.value.slice(0,120) + "…") : c.value;
-          valueTd.textContent = short;
-          if (c.value.length > 120) {
-            valueTd.title = "Click to copy full value";
-            valueTd.style.cursor = "pointer";
-            valueTd.addEventListener("click", () => {
-              navigator.clipboard.writeText(c.value).then(() => {
-                valueTd.style.outline = "2px solid #6cf";
-                setTimeout(()=> valueTd.style.outline="", 700);
-              });
-            });
-          }
+          valueTd.textContent = c.value;
           tr.appendChild(valueTd);
   
           const domainTd = document.createElement("td");
           domainTd.textContent = c.domain;
           tr.appendChild(domainTd);
   
-          const pathTd = document.createElement("td");
-          pathTd.textContent = c.path;
-          tr.appendChild(pathTd);
-  
           const expTd = document.createElement("td");
           expTd.textContent = c.session ? "session" : (c.expirationDate || "—");
           tr.appendChild(expTd);
   
           const flagsTd = document.createElement("td");
-          const flags = [];
-          if (c.secure) flags.push("Secure");
-          if (c.httpOnly) flags.push("HttpOnly");
-          if (c.hostOnly) flags.push("HostOnly");
-          if (c.sameSite) flags.push("SameSite:" + c.sameSite);
-          flagsTd.textContent = flags.join(", ") || "—";
-          tr.appendChild(flagsTd);
-  
+
+          const secureTd = document.createElement("td");
+          secureTd.textContent = c.secure;
+          tr.appendChild(secureTd);
+
+          const httpOnlyTd = document.createElement("td");
+          httpOnlyTd.textContent = c.httpOnly;
+          tr.appendChild(httpOnlyTd);
+
+          const sameSiteTd = document.createElement("td");
+          sameSiteTd.textContent = c.sameSite;
+          tr.appendChild(sameSiteTd);
+
           tbody.appendChild(tr);
         });
   
-        // attach export behavior
-       /* exportBtn.onclick = () => {
-          const json = JSON.stringify(cookies, null, 2);
-          navigator.clipboard.writeText(json).then(() => {
-            status.textContent = "Cookies copied to clipboard as JSON.";
-          }, () => {
-            // fallback: open new tab with data
-            const w = window.open("");
-            w.document.write("<pre>" + escapeHtml(json) + "</pre>");
-          });
-        };*/
       });
     }
   
@@ -108,7 +85,4 @@ document.addEventListener("DOMContentLoaded", () => {
     update();
   });
   
-  function escapeHtml(text) {
-    return text.replace(/[&<>"']/g, (m) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
-  }
   

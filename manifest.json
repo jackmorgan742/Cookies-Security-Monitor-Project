@@ -1,6 +1,6 @@
 {
     "manifest_version": 3,
-    "name": "Show Cookies (simple)",
+    "name": "Show Cookies",
     "version": "1.0",
     "description": "Display all cookies for the current tab.",
     "permissions": [
