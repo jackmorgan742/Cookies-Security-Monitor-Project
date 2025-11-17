@@ -48,16 +48,23 @@
     <div id="diffMeta" style="margin-bottom:6px; opacity:.8;"></div>
     <ul id="diffSummary" style="margin:6px 0; padding-left:18px;"></ul>
     <details style="margin-top:6px;">
-      <summary>Show details</summary>
-      <table style="margin-top:6px;">
-        <thead>
-          <tr>
-            <th>Change</th><th>Name</th><th>Domain</th><th>Path</th>
-            <th>Secure</th><th>HttpOnly</th><th>SameSite</th><th>Expires</th><th>Notes</th>
-          </tr>
-        </thead>
-        <tbody id="diffBody"></tbody>
-      </table>
+        <summary>Show details</summary>
+
+        <div class="row" style="margin:8px 0;">
+            <label><input id="fAdded"   type="checkbox" checked /> Added</label>
+            <label><input id="fRemoved" type="checkbox" checked /> Removed</label>
+            <label><input id="fChanged" type="checkbox" checked /> Changed</label>
+        </div>
+
+        <table style="margin-top:6px; width:100%;">
+            <thead>
+            <tr>
+                <th>Change</th><th>Name</th><th>Domain</th>
+                <th>Secure</th><th>HttpOnly</th><th>SameSite</th><th>Expires</th><th>Notes</th>
+            </tr>
+            </thead>
+            <tbody id="diffBody"></tbody>
+        </table>
     </details>
   </div>
 
@@ -72,6 +79,11 @@
       </thead>
       <tbody id="cookieBody"></tbody>
     </table>
+  </div>
+
+  <div id="statsPanel" class="panel" style="margin-top:12px;">
+    <div style="font-weight:600; margin-bottom:6px;">Site cookie security summary</div>
+    <div id="siteStats" class="status"></div>
   </div>
 
   <script src="workspace.js"></script>
