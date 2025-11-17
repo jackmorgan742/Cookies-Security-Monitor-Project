@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Cookie Compare Workspace</title>
+<link rel="stylesheet" href="popup.css" />
+<style>
+  body { font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; margin: 16px; max-width: 1000px; }
+  .row { display:flex; gap:8px; align-items:center; flex-wrap: wrap; }
+  .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+  .chip { padding: 2px 6px; border-radius: 10px; border: 1px solid #ddd; display:inline-block; margin-right:4px; font-size: 11px; }
+  .chip.bad { border-color: #e68; background: #ffeef3; }
+  .chip.good { border-color: #6a6; background: #f2fff2; }
+  table { width: 100%; border-collapse: collapse; }
+  th, td { border-bottom: 1px solid #eee; padding: 6px 8px; text-align: left; font-size: 12px; }
+  th { background: #fafafa; position: sticky; top: 0; }
+  .panel { border:1px solid #eee; border-radius:8px; padding:12px; }
+</style>
+</head>
+<body>
+  <h2>Cookie Compare Workspace</h2>
+
+  <div class="panel" style="margin-bottom:12px;">
+    <div class="row">
+      <button id="useActiveTab">Use Current Active Tab</button>
+      <input id="targetUrl" class="mono" type="text" placeholder="https://example.com" style="flex:1; min-width:360px;" />
+      <button id="setTarget">Set Target URL</button>
+      <button id="refresh">Refresh</button>
+      <span id="status" style="opacity:.75;"></span>
+    </div>
+    <div style="margin-top:6px;">
+      <strong>Target:</strong> <span id="targetLabel" class="mono"></span>
+    </div>
+  </div>
+
+  <div class="panel" style="margin-bottom:12px;">
+    <div class="row">
+      <button id="saveBefore" disabled>Save BEFORE</button>
+      <button id="saveAfter"  disabled>Save AFTER</button>
+      <button id="clearSnapshots" disabled>Clear</button>
+    </div>
+    <div id="snapMeta" style="margin-top:6px; opacity:.8;"></div>
+  </div>
+
+  <div id="diffPanel" class="panel" hidden>
+    <div style="font-weight:600; margin-bottom:6px;">Cookie changes (BEFORE → AFTER)</div>
+    <div id="diffMeta" style="margin-bottom:6px; opacity:.8;"></div>
+    <ul id="diffSummary" style="margin:6px 0; padding-left:18px;"></ul>
+    <details style="margin-top:6px;">
+      <summary>Show details</summary>
+      <table style="margin-top:6px;">
+        <thead>
+          <tr>
+            <th>Change</th><th>Name</th><th>Domain</th><th>Path</th>
+            <th>Secure</th><th>HttpOnly</th><th>SameSite</th><th>Expires</th><th>Notes</th>
+          </tr>
+        </thead>
+        <tbody id="diffBody"></tbody>
+      </table>
+    </details>
+  </div>
+
+  <div class="panel">
+    <div style="font-weight:600; margin-bottom:6px;">Current cookies</div>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th><th>Value</th><th>Domain</th><th>Expires</th>
+          <th>Secure</th><th>HttpOnly</th><th>SameSite</th><th>Notes</th>
+        </tr>
+      </thead>
+      <tbody id="cookieBody"></tbody>
+    </table>
+  </div>
+
+  <script src="workspace.js"></script>
+</body>
+</html>
